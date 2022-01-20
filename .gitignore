@@ -1,1 +1,5 @@
-CPE453_LWP_FILES
+CPE453_LWP_FILES/*
+test/*
+*.a
+*.o
+*.s

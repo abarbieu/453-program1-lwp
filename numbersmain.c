@@ -57,7 +57,6 @@ int main(int argc, char *argv[]){
   /* spawn a number of individual LWPs */
   for(i=1;i<=5;i++) {
     new_lwp(indentnum,(void*)i,INITIALSTACK);
-    lwp_yield();
   }
 
   lwp_start();                     /* returns when the last lwp exits */
