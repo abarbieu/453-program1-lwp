@@ -1,0 +1,16 @@
+Aidan Barbieux (abarbieu@calpoly.edu)
+
+Question 1: “How is this LWP library different from a real
+thread management library? Name two ways in which this LWP library API could
+be improved."
+
+Answer 1: LWP doesn't support hyper threading, as the kernel is unaware of the
+existence of LWPs and thus cannot put separate threads on multiple cores.
+
+Our LWP also has no protection against resource sharing synchronization issues,
+so if one thread were to access a shared resources, yield, and use that resource
+after another thread has modified it, an error could occur. 
+
+Similarly, our LWP could become deadlocked should two threads wait for eachogther's
+execution.
+

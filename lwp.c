@@ -4,10 +4,10 @@
 
 schedfun *scheduler = NULL;
 lwp_context proc_table[LWP_PROC_LIMIT];
-ptr_int_t *realSP;
+ptr_int_t *realSP; // oldSP is to free on exit
 int procs = 0;
 lwp_context *curr_proc;
-int curr_idx;
+int curr_idx = 0;
 
 
 int round_robin(){
@@ -16,7 +16,6 @@ int round_robin(){
     // qins(prev_proc);
     // return qhead->idx;
 }
-
 //---------LWP---------
 
 int new_lwp(lwpfun func, void *arg, size_t stacksize){
@@ -58,8 +57,6 @@ int new_lwp(lwpfun func, void *arg, size_t stacksize){
 
 void lwp_exit(){
     int i;
-    free(curr_proc->stack);
-
 
     if(procs <= 1){
         lwp_stop();
@@ -105,11 +102,6 @@ void lwp_start(){
     SAVE_STATE();
     GetSP(realSP);
 
-    if(scheduler == NULL){
-        curr_idx = round_robin();
-    }else{
-        curr_idx = (*scheduler)();
-    }
     curr_proc = &proc_table[curr_idx];
 
     SetSP(curr_proc->sp);

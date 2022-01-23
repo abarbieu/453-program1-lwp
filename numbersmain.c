@@ -30,7 +30,7 @@
 #include "lwp.h"
 
 #define MAXSNAKES  100
-#define INITIALSTACK 2048
+#define INITIALSTACK 8192
 
 typedef void (*sigfun)(int signum);
 static void indentnum(void *num);
@@ -55,8 +55,8 @@ int main(int argc, char *argv[]){
   printf("Launching LWPS\n");
 
   /* spawn a number of individual LWPs */
-  for(i=1;i<=5;i++) {
-    new_lwp(indentnum,(void*)i,INITIALSTACK);
+  for(i=1; i<=5; i++) {
+    new_lwp(indentnum, (void*)i, INITIALSTACK);
   }
 
   lwp_start();                     /* returns when the last lwp exits */

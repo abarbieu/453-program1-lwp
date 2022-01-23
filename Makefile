@@ -4,8 +4,7 @@ liblwp: lwp.c lwp.h
 numbersmain: numbersmain.c lwp.h liblwp.a
 	gcc -Wall -Werror -m32 -g -o $@.o $^
 
-ex: numbersmain liblwp
+ex: liblwp numbersmain
 
 clean :
-	rm *.a
-	rm *.o
+	rm *.a *.o *.s
